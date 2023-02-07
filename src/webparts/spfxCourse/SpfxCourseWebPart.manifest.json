@@ -22,7 +22,7 @@
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "spfx-course",
-      "test": "Multi-line text field",
+      "test": "Test manifest",
       "test1": true,
       "test2": "2",
       "test3": true

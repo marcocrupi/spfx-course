@@ -15,9 +15,9 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
                 Web part property value:{escape(this.props.description)}
               </p>
               <p>${escape(this.props.test)}</p>
-              <p>${this.props.test1}</p>
+              <p>${this.props.test1.toString()}</p>
               <p>${escape(this.props.test2)}</p>
-              <p>${this.props.test3}</p>
+              <p>${this.props.test3.toString()}</p>
               <a href="https://aka.ms/spfx" className={styles.button}>
                 <span className={styles.label}>Learn more</span>
               </a>
