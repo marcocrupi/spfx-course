@@ -23,9 +23,26 @@ export interface ISpfxCourseWebPartProps {
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
+  // TO SET DEFAULT VALUES IN THE PROPERTIES
+  // public static defaultProps: ISpfxCourseWebPartProps = {
+  //   description: "Default Description",
+  //   test: "Default Text",
+  //   test1: false,
+  //   test2: "1",
+  //   test3: true,
+  // };
+
   public render(): void {
     const element: React.ReactElement<ISpfxCourseProps> = React.createElement(
       SpfxCourse,
+      // TO SET DEFAULT VALUES IN THE PROPERTIES
+      // {
+      //   description: this.properties.description || SpfxCourseWebPart.defaultProps.description,
+      //   test: this.properties.test || SpfxCourseWebPart.defaultProps.test,
+      //   test1: this.properties.test1 !== undefined ? this.properties.test1 : SpfxCourseWebPart.defaultProps.test1,
+      //   test2: this.properties.test2 || SpfxCourseWebPart.defaultProps.test2,
+      //   test3: this.properties.test3 !== undefined ? this.properties.test3 : SpfxCourseWebPart.defaultProps.test3,
+      // }
       {
         description: this.properties.description,
         test: this.properties.test,
