@@ -3,6 +3,11 @@ import styles from "./SpfxCourse.module.scss";
 import { ISpfxCourseProps } from "./ISpfxCourseProps";
 import { escape } from "@microsoft/sp-lodash-subset";
 
+export interface ISPList {
+  Title: string;
+  Id: string;
+}
+
 export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
   public render(): React.ReactElement<ISpfxCourseProps> {
     return (
@@ -26,6 +31,14 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
                 Page Context, web part title:{" "}
                 {escape(this.props.context.pageContext.web.title)}
               </p>
+              <div>
+                <h2>RENDER LIST</h2>
+                <ul>
+                  {this.props.list.value.map((item: ISPList, index: number) => (
+                    <li key={index}>{item.Title}</li>
+                  ))}
+                </ul>
+              </div>
               <a href="https://aka.ms/spfx" className={styles.button}>
                 <span className={styles.label}>Learn more</span>
               </a>
