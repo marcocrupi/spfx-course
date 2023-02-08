@@ -2,7 +2,6 @@ import * as React from "react";
 import styles from "./SpfxCourse.module.scss";
 import { ISpfxCourseProps } from "./ISpfxCourseProps";
 import { escape } from "@microsoft/sp-lodash-subset";
-import { Link } from "office-ui-fabric-react/lib/Link";
 
 export interface ISPList {
   Title: string;

@@ -14,7 +14,6 @@ import {
 import {
   BaseClientSideWebPart,
   WebPartContext,
-  IWebPartPropertiesMetadata,
 } from "@microsoft/sp-webpart-base";
 
 import * as strings from "SpfxCourseWebPartStrings";
@@ -33,6 +32,7 @@ export interface ISpfxCourseWebPartProps {
   singlelist: any;
   slider: number;
   link: ILink;
+  listName: string;
 }
 export interface ISPLists {
   value: ISPList[];
@@ -64,6 +64,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
   }
 
   // ATTIVAZIONE DELLA MODALITÀ NON REATTIVA
+  // @ts-ignore
   protected get disableReactivePropertyChanges(): boolean {
     return true;
   }
@@ -126,6 +127,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
           href: "https://marcocrupi.it/",
           target: "_blank",
         },
+        listName: this.properties.listName,
       }
     );
 
@@ -187,6 +189,9 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                   text: "Pagina del corso",
                   href: "https://aka.ms/spfx",
                   target: "_blank",
+                }),
+                PropertyPaneTextField("listName", {
+                  label: strings.ListNameFieldLabel,
                 }),
               ],
             },
