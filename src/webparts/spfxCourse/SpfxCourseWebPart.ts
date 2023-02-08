@@ -26,6 +26,7 @@ export interface ISpfxCourseWebPartProps {
   test3: boolean;
   context: WebPartContext;
   list: any;
+  singlelist: any;
 }
 
 export interface ISPLists {
@@ -53,9 +54,31 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
       });
   }
 
+  private _getSingleListById(id: string): Promise<ISPList> {
+    return this.context.spHttpClient
+      .get(
+        `${this.context.pageContext.web.absoluteUrl}/_api/web/lists('${id}')/items`,
+        SPHttpClient.configurations.v1
+      )
+      .then((response: SPHttpClientResponse) => {
+        console.log("responseSingleList", response);
+        return response.json();
+      })
+      .catch(() => {
+        return Promise.resolve({ Title: "", Id: "" });
+      });
+  }
+
   public async render(): Promise<void> {
     const lists: ISPLists = await this._getListData();
     console.log("dataList", lists);
+
+    let listProperties;
+    if (lists.value.length > 0) {
+      listProperties = await this._getSingleListById(lists.value[4].Id);
+    }
+    console.log("listProperties", listProperties);
+
     const element: React.ReactElement<ISpfxCourseProps> = React.createElement(
       SpfxCourse,
       {
@@ -66,6 +89,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
         test3: this.properties.test3,
         context: this.context,
         list: lists,
+        singlelist: listProperties,
       }
     );
 

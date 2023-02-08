@@ -8,4 +8,5 @@ export interface ISpfxCourseProps {
   test3: boolean;
   context: WebPartContext;
   list: any;
+  singlelist: any;
 }

@@ -5,6 +5,7 @@ import { escape } from "@microsoft/sp-lodash-subset";
 
 export interface ISPList {
   Title: string;
+  Description: string;
   Id: string;
 }
 
@@ -33,10 +34,27 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
               </p>
               <div>
                 <h2>RENDER LIST</h2>
-                <ul>
+                <ul className={styles.list}>
                   {this.props.list.value.map((item: ISPList, index: number) => (
-                    <li key={index}>{item.Title}</li>
+                    <li className={styles.listItem} key={index}>
+                      <span className="ms-font-l">{item.Title}</span>
+                    </li>
                   ))}
+                </ul>
+              </div>
+              <div className="singleList">
+                <h2>RENDER LIST ITINERARIO</h2>
+                <ul className={styles.list}>
+                  {this.props.singlelist.value.map(
+                    (item: ISPList, index: number) => (
+                      <li className={styles.listItem} key={index}>
+                        <div className="ms-font-l">Titolo: {item.Title}</div>
+                        <div className="ms-font-l">
+                          Descrizione: {item.Description}
+                        </div>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
               <a href="https://aka.ms/spfx" className={styles.button}>
