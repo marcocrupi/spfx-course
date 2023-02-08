@@ -79,7 +79,9 @@ export default class SpfxCourse extends React.Component<
                   </ul>
                 </div>
               )}
-
+              <div>
+                <h2>Slider value: {this.props.slider.toString()}</h2>
+              </div>
               <a href="https://aka.ms/spfx" className={styles.button}>
                 <span className={styles.label}>Learn more</span>
               </a>

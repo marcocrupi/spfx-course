@@ -9,4 +9,5 @@ export interface ISpfxCourseProps {
   context: WebPartContext;
   list: any;
   singlelist: any;
+  slider: number;
 }

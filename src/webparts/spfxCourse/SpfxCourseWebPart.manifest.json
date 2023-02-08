@@ -25,7 +25,8 @@
       "test": "Test manifest",
       "test1": true,
       "test2": "2",
-      "test3": true
+      "test3": true,
+      "slider": 0
     }
   }]
 }

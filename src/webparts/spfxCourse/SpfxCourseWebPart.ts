@@ -5,12 +5,16 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   PropertyPaneCheckbox,
-  PropertyPaneDropdown,
+  PropertyPaneLabel,
+  PropertyPaneLink,
+  PropertyPaneSlider,
   PropertyPaneToggle,
+  PropertyPaneDropdown,
 } from "@microsoft/sp-property-pane";
 import {
   BaseClientSideWebPart,
   WebPartContext,
+  IWebPartPropertiesMetadata,
 } from "@microsoft/sp-webpart-base";
 
 import * as strings from "SpfxCourseWebPartStrings";
@@ -27,8 +31,8 @@ export interface ISpfxCourseWebPartProps {
   context: WebPartContext;
   list: any;
   singlelist: any;
+  slider: number;
 }
-
 export interface ISPLists {
   value: ISPList[];
 }
@@ -90,6 +94,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
         context: this.context,
         list: lists,
         singlelist: listProperties,
+        slider: this.properties.slider,
       }
     );
 
@@ -139,6 +144,12 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                   label: "Toggle",
                   onText: "On",
                   offText: "Off",
+                }),
+                PropertyPaneSlider("slider", {
+                  label: "Slider",
+                  min: 0,
+                  max: 100,
+                  step: 1,
                 }),
               ],
             },
