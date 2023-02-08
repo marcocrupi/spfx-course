@@ -32,6 +32,7 @@ export interface ISpfxCourseWebPartProps {
   list: any;
   singlelist: any;
   slider: number;
+  link: string;
 }
 export interface ISPLists {
   value: ISPList[];
@@ -39,6 +40,7 @@ export interface ISPLists {
 
 export interface ISPList {
   Title: string;
+
   Id: string;
 }
 
@@ -95,6 +97,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
         list: lists,
         singlelist: listProperties,
         slider: this.properties.slider,
+        link: this.properties.link,
       }
     );
 
@@ -150,6 +153,11 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                   min: 0,
                   max: 100,
                   step: 1,
+                }),
+                PropertyPaneLink("link", {
+                  text: "Pagina del corso",
+                  href: "https://aka.ms/spfx",
+                  target: "_blank",
                 }),
               ],
             },

@@ -26,7 +26,8 @@
       "test1": true,
       "test2": "2",
       "test3": true,
-      "slider": 0
+      "slider": 0,
+      "link": "link di prova"
     }
   }]
 }
