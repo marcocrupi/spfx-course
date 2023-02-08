@@ -14,6 +14,8 @@ import {
 } from "@microsoft/sp-webpart-base";
 
 import * as strings from "SpfxCourseWebPartStrings";
+import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
+
 import SpfxCourse from "./components/SpfxCourse";
 import { ISpfxCourseProps } from "./components/ISpfxCourseProps";
 export interface ISpfxCourseWebPartProps {
@@ -23,10 +25,37 @@ export interface ISpfxCourseWebPartProps {
   test2: string;
   test3: boolean;
   context: WebPartContext;
+  list: any;
+}
+
+export interface ISPLists {
+  value: ISPList[];
+}
+
+export interface ISPList {
+  Title: string;
+  Id: string;
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
-  public render(): void {
+  private _getListData(): Promise<ISPLists> {
+    return this.context.spHttpClient
+      .get(
+        `${this.context.pageContext.web.absoluteUrl}/_api/web/lists?$filter=Hidden eq false`,
+        SPHttpClient.configurations.v1
+      )
+      .then((response: SPHttpClientResponse) => {
+        console.log("response", response);
+        return response.json();
+      })
+      .catch(() => {
+        return Promise.resolve({ value: [] });
+      });
+  }
+
+  public async render(): Promise<void> {
+    const lists: ISPLists = await this._getListData();
+    console.log("dataList", lists);
     const element: React.ReactElement<ISpfxCourseProps> = React.createElement(
       SpfxCourse,
       {
@@ -36,6 +65,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
         test2: this.properties.test2,
         test3: this.properties.test3,
         context: this.context,
+        list: lists,
       }
     );
 

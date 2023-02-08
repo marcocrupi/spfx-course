@@ -7,4 +7,5 @@ export interface ISpfxCourseProps {
   test2: string;
   test3: boolean;
   context: WebPartContext;
+  list: any;
 }
