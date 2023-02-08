@@ -62,6 +62,11 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
     return "";
   }
 
+  // ATTIVAZIONE DELLA MODALITÀ NON REATTIVA
+  protected get disableReactivePropertyChanges(): boolean {
+    return true;
+  }
+
   private _getListData(): Promise<ISPLists> {
     return this.context.spHttpClient
       .get(
