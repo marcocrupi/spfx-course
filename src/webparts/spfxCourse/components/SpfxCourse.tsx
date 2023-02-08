@@ -23,7 +23,6 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
                 {this.props.context.pageContext.user.displayName}
               </p>
               <p>
-                {" "}
                 Page Context, web part title:{" "}
                 {escape(this.props.context.pageContext.web.title)}
               </p>
