@@ -110,14 +110,19 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
     try {
       let response = await this.context.spHttpClient.get(
         this.context.pageContext.web.absoluteUrl +
-          `/_api/web/lists/getByTitle('${escape(value)}')?$select=Id`,
+          `/_api/web/lists/getByTitle('${encodeURIComponent(
+            value
+          )}')?$select=Id`,
         SPHttpClient.configurations.v1
       );
 
       if (response.ok) {
         return "";
       } else if (response.status === 404) {
-        return `List '${escape(value)}' doesn't exist in the current site`;
+        console.log(value);
+        return `List '${encodeURIComponent(
+          value
+        )}' doesn't exist in the current site`;
       } else {
         return `Error: ${response.statusText}. Please try again`;
       }
