@@ -50,6 +50,18 @@ export interface ILink {
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
+  private validateDescription(value: string): string {
+    if (value === null || value.trim().length === 0) {
+      return "Provide a description";
+    }
+
+    if (value.length > 40) {
+      return "Description should not be longer than 40 characters";
+    }
+
+    return "";
+  }
+
   private _getListData(): Promise<ISPLists> {
     return this.context.spHttpClient
       .get(
@@ -135,6 +147,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
               groupFields: [
                 PropertyPaneTextField("description", {
                   label: "Description",
+                  onGetErrorMessage: this.validateDescription.bind(this),
                 }),
                 PropertyPaneTextField("test", {
                   label: "Multi-line Text Field",

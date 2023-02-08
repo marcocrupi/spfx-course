@@ -34,7 +34,7 @@ export default class SpfxCourse extends React.Component<
             <div className={styles.column}>
               <span className={styles.title}>Share Point Course</span>
               <p className={styles.description}>
-                Web part property value:{escape(this.props.description)}
+                Web part property value: {escape(this.props.description)}
               </p>
               <p>${escape(this.props.test)}</p>
               <p>${this.props.test1.toString()}</p>
