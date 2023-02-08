@@ -3,7 +3,7 @@
   "solution": {
     "name": "spfx-course-client-side-solution",
     "id": "47b9d04f-5513-4137-9049-29b1dafb8701",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,

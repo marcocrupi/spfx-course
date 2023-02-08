@@ -11,6 +11,7 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
           <div className={styles.row}>
             <div className={styles.column}>
               <span className={styles.title}>Share Point Course</span>
+              <h2>TEST2</h2>
               <p className={styles.description}>
                 Web part property value:{escape(this.props.description)}
               </p>

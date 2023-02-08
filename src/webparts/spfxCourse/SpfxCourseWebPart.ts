@@ -13,7 +13,6 @@ import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "SpfxCourseWebPartStrings";
 import SpfxCourse from "./components/SpfxCourse";
 import { ISpfxCourseProps } from "./components/ISpfxCourseProps";
-
 export interface ISpfxCourseWebPartProps {
   description: string;
   test: string;
