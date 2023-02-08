@@ -32,7 +32,7 @@ export interface ISpfxCourseWebPartProps {
   list: any;
   singlelist: any;
   slider: number;
-  link: string;
+  link: ILink;
 }
 export interface ISPLists {
   value: ISPList[];
@@ -40,8 +40,13 @@ export interface ISPLists {
 
 export interface ISPList {
   Title: string;
-
   Id: string;
+}
+
+export interface ILink {
+  text: string;
+  href: string;
+  target: string;
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
@@ -97,7 +102,11 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
         list: lists,
         singlelist: listProperties,
         slider: this.properties.slider,
-        link: this.properties.link,
+        link: {
+          text: "Pagina del corso",
+          href: "https://marcocrupi.it/",
+          target: "_blank",
+        },
       }
     );
 

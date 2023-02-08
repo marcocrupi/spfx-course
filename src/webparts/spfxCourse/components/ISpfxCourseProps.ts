@@ -10,5 +10,11 @@ export interface ISpfxCourseProps {
   list: any;
   singlelist: any;
   slider: number;
-  link: string;
+  link: ILink;
+}
+
+export interface ILink {
+  text: string;
+  href: string;
+  target: string;
 }

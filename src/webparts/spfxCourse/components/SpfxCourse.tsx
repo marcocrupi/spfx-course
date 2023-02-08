@@ -4,6 +4,11 @@ import { ISpfxCourseProps } from "./ISpfxCourseProps";
 import { escape } from "@microsoft/sp-lodash-subset";
 import { Link } from "office-ui-fabric-react/lib/Link";
 
+export interface ISPList {
+  Title: string;
+  Description: string;
+  Id: string;
+}
 export default class SpfxCourse extends React.Component<
   ISpfxCourseProps,
   { showSingleList: boolean }
@@ -78,7 +83,9 @@ export default class SpfxCourse extends React.Component<
                 <h2>Slider value: {this.props.slider.toString()}</h2>
               </div>
               <div>
-                <a href="">{this.props.link}</a>
+                <a href={this.props.link.href} className={styles.button}>
+                  <span className={styles.label}>{this.props.link.text}</span>
+                </a>
               </div>
               <a href="https://aka.ms/spfx" className={styles.button}>
                 <span className={styles.label}>Learn more</span>
