@@ -8,7 +8,10 @@ import {
   PropertyPaneDropdown,
   PropertyPaneToggle,
 } from "@microsoft/sp-property-pane";
-import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
+import {
+  BaseClientSideWebPart,
+  WebPartContext,
+} from "@microsoft/sp-webpart-base";
 
 import * as strings from "SpfxCourseWebPartStrings";
 import SpfxCourse from "./components/SpfxCourse";
@@ -19,6 +22,7 @@ export interface ISpfxCourseWebPartProps {
   test1: boolean;
   test2: string;
   test3: boolean;
+  context: WebPartContext;
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
@@ -31,6 +35,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
         test1: this.properties.test1,
         test2: this.properties.test2,
         test3: this.properties.test3,
+        context: this.context,
       }
     );
 

@@ -11,7 +11,6 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
           <div className={styles.row}>
             <div className={styles.column}>
               <span className={styles.title}>Share Point Course</span>
-              <h2>TEST2</h2>
               <p className={styles.description}>
                 Web part property value:{escape(this.props.description)}
               </p>
@@ -19,6 +18,15 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
               <p>${this.props.test1.toString()}</p>
               <p>${escape(this.props.test2)}</p>
               <p>${this.props.test3.toString()}</p>
+              <p>
+                Page Context, username:{" "}
+                {this.props.context.pageContext.user.displayName}
+              </p>
+              <p>
+                {" "}
+                Page Context, web part title:{" "}
+                {escape(this.props.context.pageContext.web.title)}
+              </p>
               <a href="https://aka.ms/spfx" className={styles.button}>
                 <span className={styles.label}>Learn more</span>
               </a>
