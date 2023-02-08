@@ -9,7 +9,23 @@ export interface ISPList {
   Id: string;
 }
 
-export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
+export default class SpfxCourse extends React.Component<
+  ISpfxCourseProps,
+  { showSingleList: boolean }
+> {
+  constructor(props: ISpfxCourseProps) {
+    super(props);
+    this.state = {
+      showSingleList: false,
+    };
+  }
+
+  public toggleSingleList = (index: number) => {
+    if (index === 4) {
+      this.setState({ showSingleList: !this.state.showSingleList });
+    }
+  };
+
   public render(): React.ReactElement<ISpfxCourseProps> {
     return (
       <div className={styles.spfxCourse}>
@@ -36,27 +52,34 @@ export default class SpfxCourse extends React.Component<ISpfxCourseProps, {}> {
                 <h2>RENDER LIST</h2>
                 <ul className={styles.list}>
                   {this.props.list.value.map((item: ISPList, index: number) => (
-                    <li className={styles.listItem} key={index}>
+                    <li
+                      className={styles.listItem}
+                      key={index}
+                      onClick={() => this.toggleSingleList(index)}
+                    >
                       <span className="ms-font-l">{item.Title}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="singleList">
-                <h2>RENDER LIST ITINERARIO</h2>
-                <ul className={styles.list}>
-                  {this.props.singlelist.value.map(
-                    (item: ISPList, index: number) => (
-                      <li className={styles.listItem} key={index}>
-                        <div className="ms-font-l">Titolo: {item.Title}</div>
-                        <div className="ms-font-l">
-                          Descrizione: {item.Description}
-                        </div>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
+              {this.state.showSingleList && (
+                <div className="singleList">
+                  <h2>RENDER LIST ITINERARIO</h2>
+                  <ul className={styles.list}>
+                    {this.props.singlelist.value.map(
+                      (item: ISPList, index: number) => (
+                        <li className={styles.listItem} key={index}>
+                          <div className="ms-font-l">Titolo: {item.Title}</div>
+                          <div className="ms-font-l">
+                            Descrizione: {item.Description}
+                          </div>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+              )}
+
               <a href="https://aka.ms/spfx" className={styles.button}>
                 <span className={styles.label}>Learn more</span>
               </a>
