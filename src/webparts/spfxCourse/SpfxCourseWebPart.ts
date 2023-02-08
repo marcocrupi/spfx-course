@@ -5,7 +5,6 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   PropertyPaneCheckbox,
-  PropertyPaneLabel,
   PropertyPaneLink,
   PropertyPaneSlider,
   PropertyPaneToggle,
@@ -21,6 +20,8 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 
 import SpfxCourse from "./components/SpfxCourse";
 import { ISpfxCourseProps } from "./components/ISpfxCourseProps";
+
+import { escape } from "@microsoft/sp-lodash-subset";
 export interface ISpfxCourseWebPartProps {
   description: string;
   test: string;
@@ -50,23 +51,10 @@ export interface ILink {
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
-  // VALIDAZIONE INLINE
-  private validateDescription(value: string): string {
-    if (value === null || value.trim().length === 0) {
-      return "Provide a description";
-    }
-
-    if (value.length > 40) {
-      return "Description should not be longer than 40 characters";
-    }
-
-    return "";
-  }
-
   // ATTIVAZIONE DELLA MODALITÀ NON REATTIVA
   // @ts-ignore
   protected get disableReactivePropertyChanges(): boolean {
-    return true;
+    return false;
   }
 
   // CHIAMATE HTTP
@@ -98,6 +86,44 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
       .catch(() => {
         return Promise.resolve({ Title: "", Id: "" });
       });
+  }
+
+  // VALIDAZIONE INLINE
+  private validateDescription(value: string): string {
+    if (value === null || value.trim().length === 0) {
+      return "Provide a description";
+    }
+
+    if (value.length > 40) {
+      return "Description should not be longer than 40 characters";
+    }
+
+    return "";
+  }
+
+  // VALIDAZIONE TRAMITE CHIAMATA HTTP
+  private async validateListName(value: string): Promise<string> {
+    if (value === null || value.length === 0) {
+      return "Provide the list name";
+    }
+
+    try {
+      let response = await this.context.spHttpClient.get(
+        this.context.pageContext.web.absoluteUrl +
+          `/_api/web/lists/getByTitle('${escape(value)}')?$select=Id`,
+        SPHttpClient.configurations.v1
+      );
+
+      if (response.ok) {
+        return "";
+      } else if (response.status === 404) {
+        return `List '${escape(value)}' doesn't exist in the current site`;
+      } else {
+        return `Error: ${response.statusText}. Please try again`;
+      }
+    } catch (error) {
+      return error.message;
+    }
   }
 
   public async render(): Promise<void> {
@@ -192,6 +218,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                 }),
                 PropertyPaneTextField("listName", {
                   label: strings.ListNameFieldLabel,
+                  onGetErrorMessage: this.validateListName.bind(this),
                 }),
               ],
             },
