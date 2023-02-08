@@ -50,6 +50,7 @@ export interface ILink {
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
+  // VALIDAZIONE INLINE
   private validateDescription(value: string): string {
     if (value === null || value.trim().length === 0) {
       return "Provide a description";
@@ -67,6 +68,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
     return true;
   }
 
+  // CHIAMATE HTTP
   private _getListData(): Promise<ISPLists> {
     return this.context.spHttpClient
       .get(
