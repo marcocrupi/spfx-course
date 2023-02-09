@@ -224,7 +224,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                   // CONVALIDA VALORI TRAMITE API REMOTE
                   onGetErrorMessage: this.validateListName.bind(this),
                   // AUMENTO DEL RITARDO DI CONVALIDA
-                  deferredValidationTime: 500,
+                  deferredValidationTime: 1500,
                 }),
                 PropertyPaneTextField("storeList", {
                   label: strings.ListFieldLabel,

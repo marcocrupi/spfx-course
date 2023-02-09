@@ -2,6 +2,7 @@ import * as React from "react";
 import styles from "./SpfxCourse.module.scss";
 import { ISpfxCourseProps } from "./ISpfxCourseProps";
 import { escape } from "@microsoft/sp-lodash-subset";
+import AsyncDropDown from "./AsyncDropDown/AsyncDropDown";
 
 export interface ISPList {
   Title: string;
@@ -84,6 +85,7 @@ export default class SpfxCourse extends React.Component<
               <div>
                 List name: <strong>{escape(this.props.storeList)}</strong>
               </div>
+              <AsyncDropDown />
               <div>
                 <a href={this.props.link.href} className={styles.button}>
                   <span className={styles.label}>{this.props.link.text}</span>
