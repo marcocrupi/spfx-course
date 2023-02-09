@@ -148,6 +148,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
   //   );
   // }
 
+  // METODO PER RESTITUIRE GLI ITEMS DI CIASCUNA LISTA SELEZIONATA NEL DROPDOWN
   private loadItems(): Promise<IDropdownOption[]> {
     console.log("STORE LIST PROPERTIES LOAD ITEMS", this.properties.storeList);
     if (!this.properties.storeList) {
