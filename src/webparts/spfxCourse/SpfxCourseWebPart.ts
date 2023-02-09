@@ -34,6 +34,7 @@ export interface ISpfxCourseWebPartProps {
   slider: number;
   link: ILink;
   listName: string;
+  storeList: string;
 }
 export interface ISPLists {
   value: ISPList[];
@@ -155,6 +156,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
           target: "_blank",
         },
         listName: this.properties.listName,
+        storeList: this.properties.storeList,
       }
     );
 
@@ -223,6 +225,9 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                   onGetErrorMessage: this.validateListName.bind(this),
                   // AUMENTO DEL RITARDO DI CONVALIDA
                   deferredValidationTime: 500,
+                }),
+                PropertyPaneTextField("storeList", {
+                  label: strings.ListFieldLabel,
                 }),
               ],
             },

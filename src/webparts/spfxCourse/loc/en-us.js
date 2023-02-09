@@ -4,5 +4,6 @@ define([], function () {
     BasicGroupName: "Group Name",
     DescriptionFieldLabel: "Description Field",
     ListNameFieldLabel: "List name",
+    ListFieldLabel: "List",
   };
 });

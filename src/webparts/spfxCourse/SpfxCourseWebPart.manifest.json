@@ -27,7 +27,8 @@
       "test2": "2",
       "test3": true,
       "slider": 0,
-      "listName": ""
+      "listName": "",
+      "storeList": ""
     }
   }]
 }
