@@ -22,6 +22,11 @@ import SpfxCourse from "./components/SpfxCourse";
 import { ISpfxCourseProps } from "./components/ISpfxCourseProps";
 
 import { escape } from "@microsoft/sp-lodash-subset";
+
+import { PropertyPaneAsyncDropdown } from "./components/AsyncDropDown/PropertyPaneAsyncDropdown";
+import { IDropdownOption } from "office-ui-fabric-react/lib/components/Dropdown";
+import { update, get } from "@microsoft/sp-lodash-subset";
+
 export interface ISpfxCourseWebPartProps {
   description: string;
   test: string;
@@ -52,6 +57,40 @@ export interface ILink {
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
+  // CARICARE LE LISTE DISPONIBILI NEL DROPDOWN
+  private loadLists(): Promise<IDropdownOption[]> {
+    return new Promise<IDropdownOption[]>(
+      (
+        resolve: (options: IDropdownOption[]) => void,
+        reject: (error: any) => void
+      ) => {
+        setTimeout(() => {
+          resolve([
+            {
+              key: "sharedDocuments",
+              text: "Shared Documents",
+            },
+            {
+              key: "myDocuments",
+              text: "My Documents",
+            },
+          ]);
+        }, 2000);
+      }
+    );
+  }
+
+  // METODO PER GESTIRE LA MODIFICA DEL VALORE NEL DROPDOWN
+  private onListChange(propertyPath: string, newValue: any): void {
+    const oldValue: any = get(this.properties, propertyPath);
+    // store new value in web part properties
+    update(this.properties, propertyPath, (): any => {
+      return newValue;
+    });
+    // refresh web part
+    this.render();
+  }
+
   // ATTIVAZIONE DELLA MODALITÀ NON REATTIVA
   // @ts-ignore
   protected get disableReactivePropertyChanges(): boolean {
@@ -228,6 +267,12 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                 }),
                 PropertyPaneTextField("storeList", {
                   label: strings.ListFieldLabel,
+                }),
+                new PropertyPaneAsyncDropdown("storeList", {
+                  label: strings.ListFieldLabel,
+                  loadOptions: this.loadLists.bind(this),
+                  onPropertyChange: this.onListChange.bind(this),
+                  selectedKey: this.properties.storeList,
                 }),
               ],
             },
