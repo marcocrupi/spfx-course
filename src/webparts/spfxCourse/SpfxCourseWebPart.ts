@@ -219,7 +219,10 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                 }),
                 PropertyPaneTextField("listName", {
                   label: strings.ListNameFieldLabel,
+                  // CONVALIDA VALORI TRAMITE API REMOTE
                   onGetErrorMessage: this.validateListName.bind(this),
+                  // AUMENTO DEL RITARDO DI CONVALIDA
+                  deferredValidationTime: 500,
                 }),
               ],
             },
