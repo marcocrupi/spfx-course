@@ -72,4 +72,23 @@
       display: inline-block;
     }
   }
+  .allPages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    .boxPage {
+      border: 1px solid white;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
 }
