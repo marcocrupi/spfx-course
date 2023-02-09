@@ -14,6 +14,7 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 
 export interface IRenderAllPagesWebPartProps {
   description: string;
+  allPages: ISPLists;
 }
 
 export interface ISPLists {
@@ -47,6 +48,7 @@ export default class RenderAllPagesWebPart extends BaseClientSideWebPart<IRender
     const element: React.ReactElement<IRenderAllPagesProps> =
       React.createElement(RenderAllPages, {
         description: this.properties.description,
+        allPages: pagesList,
       });
 
     ReactDom.render(element, this.domElement);
@@ -56,6 +58,7 @@ export default class RenderAllPagesWebPart extends BaseClientSideWebPart<IRender
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
+  // @ts-ignore
   protected get dataVersion(): Version {
     return Version.parse("1.0");
   }
