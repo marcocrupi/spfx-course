@@ -13,6 +13,7 @@ export interface ISpfxCourseProps {
   link: ILink;
   listName: string;
   storeList: string;
+  itemName: string;
 }
 
 export interface ILink {

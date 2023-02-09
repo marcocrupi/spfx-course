@@ -3,7 +3,9 @@ declare interface ISpfxCourseWebPartStrings {
   BasicGroupName: string;
   DescriptionFieldLabel: string;
   ListNameFieldLabel: string;
-  ListFieldLabel: string;
+  ListFieldWriteLabel: string;
+  ListFieldSelectLabel: string;
+  ItemFieldLabel: string;
 }
 
 declare module "SpfxCourseWebPartStrings" {

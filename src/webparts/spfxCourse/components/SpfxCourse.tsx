@@ -93,6 +93,9 @@ export default class SpfxCourse extends React.Component<
                 List name: <strong>{escape(this.props.storeList)}</strong>
               </div>
               <div>
+                Item name: <strong>{escape(this.props.itemName)}</strong>
+              </div>
+              <div>
                 <a href={this.props.link.href} className={styles.button}>
                   <span className={styles.label}>{this.props.link.text}</span>
                 </a>

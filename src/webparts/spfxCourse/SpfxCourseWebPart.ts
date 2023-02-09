@@ -40,7 +40,9 @@ export interface ISpfxCourseWebPartProps {
   link: ILink;
   listName: string;
   storeList: string;
+  item: string;
 }
+
 export interface ISPLists {
   value: ISPList[];
 }
@@ -57,6 +59,8 @@ export interface ILink {
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
+  private itemsDropDown: PropertyPaneAsyncDropdown;
+
   // VISUALIZZARE LE LISTE SPECIFICATE DENTO resolve() NEL DROPDOWN
   // private loadLists(): Promise<IDropdownOption[]> {
   //   return new Promise<IDropdownOption[]>(
@@ -101,8 +105,74 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
     });
   }
 
-  // METODO PER GESTIRE LA MODIFICA DEL VALORE NEL DROPDOWN
-  private onListChange(propertyPath: string, newValue: any): void {
+  // METODO PER RENDEREIZZARE ITEM PREDEFINITI PER LISTA
+  // private loadItems(): Promise<IDropdownOption[]> {
+  //   if (!this.properties.listName) {
+  //     // resolve to empty options since no list has been selected
+  //     return Promise.resolve([]);
+  //   }
+
+  //   const wp: SpfxCourseWebPart = this;
+
+  //   return new Promise<IDropdownOption[]>(
+  //     (
+  //       resolve: (options: IDropdownOption[]) => void,
+  //       reject: (error: any) => void
+  //     ) => {
+  //       setTimeout(() => {
+  //         const items = {
+  //           sharedDocuments: [
+  //             {
+  //               key: "spfx_presentation.pptx",
+  //               text: "SPFx for the masses",
+  //             },
+  //             {
+  //               key: "hello-world.spapp",
+  //               text: "hello-world.spapp",
+  //             },
+  //           ],
+  //           myDocuments: [
+  //             {
+  //               key: "isaiah_cv.docx",
+  //               text: "Isaiah CV",
+  //             },
+  //             {
+  //               key: "isaiah_expenses.xlsx",
+  //               text: "Isaiah Expenses",
+  //             },
+  //           ],
+  //         };
+  //         resolve(items[wp.properties.listName]);
+  //       }, 2000);
+  //     }
+  //   );
+  // }
+
+  private loadItems(): Promise<IDropdownOption[]> {
+    console.log("STORE LIST PROPERTIES LOAD ITEMS", this.properties.storeList);
+    if (!this.properties.storeList) {
+      return Promise.resolve([]);
+    }
+
+    const url: string = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('${this.properties.storeList}')/items`;
+
+    return this.context.spHttpClient
+      .get(url, SPHttpClient.configurations.v1)
+      .then((response: SPHttpClientResponse) => {
+        return response.json().then((json) => {
+          console.log("RESPONSE LOAD ITEMS", json);
+          const options: IDropdownOption[] = json.value.map((item) => {
+            return {
+              key: item.Title,
+              text: item.Title,
+            };
+          });
+          return options;
+        });
+      });
+  }
+
+  private onListItemChange(propertyPath: string, newValue: any): void {
     const oldValue: any = get(this.properties, propertyPath);
     // store new value in web part properties
     update(this.properties, propertyPath, (): any => {
@@ -110,6 +180,29 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
     });
     // refresh web part
     this.render();
+  }
+
+  // METODO PER GESTIRE LA MODIFICA DEL VALORE NEL DROPDOWN
+  private onListChange(propertyPath: string, newValue: any): void {
+    const oldValue: any = get(this.properties, propertyPath);
+    // store new value in web part properties
+    update(this.properties, propertyPath, (): any => {
+      return newValue;
+    });
+    // reset selected item
+    this.properties.item = undefined;
+    // store new value in web part properties
+    update(this.properties, "item", (): any => {
+      return this.properties.item;
+    });
+    // refresh web part
+    this.render();
+    // reset selected values in item dropdown
+    this.itemsDropDown.properties.selectedKey = this.properties.item;
+    // allow to load items
+    this.itemsDropDown.properties.disabled = false;
+    // load items and re-render items dropdown
+    this.itemsDropDown.render();
   }
 
   // ATTIVAZIONE DELLA MODALITÀ NON REATTIVA
@@ -217,6 +310,7 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
         },
         listName: this.properties.listName,
         storeList: this.properties.storeList,
+        itemName: this.properties.item,
       }
     );
 
@@ -233,6 +327,15 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    this.itemsDropDown = new PropertyPaneAsyncDropdown("item", {
+      label: strings.ItemFieldLabel,
+      loadOptions: this.loadItems.bind(this),
+      onPropertyChange: this.onListItemChange.bind(this),
+      selectedKey: this.properties.item,
+      // should be disabled if no list has been selected
+      disabled: !this.properties.listName,
+    });
+
     return {
       pages: [
         {
@@ -287,14 +390,15 @@ export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourse
                   deferredValidationTime: 1500,
                 }),
                 PropertyPaneTextField("storeList", {
-                  label: strings.ListFieldLabel,
+                  label: strings.ListFieldWriteLabel,
                 }),
                 new PropertyPaneAsyncDropdown("storeList", {
-                  label: strings.ListFieldLabel,
+                  label: strings.ListFieldSelectLabel,
                   loadOptions: this.loadLists.bind(this),
                   onPropertyChange: this.onListChange.bind(this),
                   selectedKey: this.properties.storeList,
                 }),
+                this.itemsDropDown,
               ],
             },
           ],
