@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/spfxCourse/SpfxCourseWebPart.manifest.json"
         }
       ]
+    },
+    "render-all-pages-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/renderAllPages/RenderAllPagesWebPart.js",
+          "manifest": "./src/webparts/renderAllPages/RenderAllPagesWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "SpfxCourseWebPartStrings": "lib/webparts/spfxCourse/loc/{locale}.js"
+    "SpfxCourseWebPartStrings": "lib/webparts/spfxCourse/loc/{locale}.js",
+    "RenderAllPagesWebPartStrings": "lib/webparts/renderAllPages/loc/{locale}.js"
   }
 }
