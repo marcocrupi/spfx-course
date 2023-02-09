@@ -57,27 +57,48 @@ export interface ILink {
 }
 
 export default class SpfxCourseWebPart extends BaseClientSideWebPart<ISpfxCourseWebPartProps> {
-  // CARICARE LE LISTE DISPONIBILI NEL DROPDOWN
+  // VISUALIZZARE LE LISTE SPECIFICATE DENTO resolve() NEL DROPDOWN
+  // private loadLists(): Promise<IDropdownOption[]> {
+  //   return new Promise<IDropdownOption[]>(
+  //     (
+  //       resolve: (options: IDropdownOption[]) => void,
+  //       reject: (error: any) => void
+  //     ) => {
+  //       setTimeout(() => {
+  //         resolve([
+  //           {
+  //             key: "sharedDocuments",
+  //             text: "Shared Documents",
+  //           },
+  //           {
+  //             key: "myDocuments",
+  //             text: "My Documents",
+  //           },
+  //           {
+  //             key: "Test space Two",
+  //             text: "Test space Two",
+  //           },
+  //           {
+  //             key: "testlist",
+  //             text: "testlist",
+  //           },
+  //         ]);
+  //       }, 2000);
+  //     }
+  //   );
+  // }
+
+  // RENDERIZZARE TUTTE LE LISTE NEL DROPDOWN MENÙ
   private loadLists(): Promise<IDropdownOption[]> {
-    return new Promise<IDropdownOption[]>(
-      (
-        resolve: (options: IDropdownOption[]) => void,
-        reject: (error: any) => void
-      ) => {
-        setTimeout(() => {
-          resolve([
-            {
-              key: "sharedDocuments",
-              text: "Shared Documents",
-            },
-            {
-              key: "myDocuments",
-              text: "My Documents",
-            },
-          ]);
-        }, 2000);
-      }
-    );
+    return this._getListData().then((response) => {
+      const options: IDropdownOption[] = response.value.map((list) => {
+        return {
+          key: list.Title,
+          text: list.Title,
+        };
+      });
+      return options;
+    });
   }
 
   // METODO PER GESTIRE LA MODIFICA DEL VALORE NEL DROPDOWN
