@@ -3,6 +3,13 @@ import styles from "./SpfxCourse.module.scss";
 import { ISpfxCourseProps } from "./ISpfxCourseProps";
 import { escape } from "@microsoft/sp-lodash-subset";
 import AsyncDropDown from "./AsyncDropDown/AsyncDropDown";
+import { IDropdownOption } from "office-ui-fabric-react/lib/components/Dropdown";
+
+export interface IAsyncDropdownState {
+  loading: boolean;
+  options: IDropdownOption[];
+  error: string;
+}
 
 export interface ISPList {
   Title: string;
@@ -85,7 +92,6 @@ export default class SpfxCourse extends React.Component<
               <div>
                 List name: <strong>{escape(this.props.storeList)}</strong>
               </div>
-              <AsyncDropDown />
               <div>
                 <a href={this.props.link.href} className={styles.button}>
                   <span className={styles.label}>{this.props.link.text}</span>

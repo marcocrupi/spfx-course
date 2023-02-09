@@ -1,7 +1,5 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 
-import { IDropdownOption } from "office-ui-fabric-react/lib/components/Dropdown";
-
 export interface ISpfxCourseProps {
   description: string;
   test: string;
@@ -15,13 +13,6 @@ export interface ISpfxCourseProps {
   link: ILink;
   listName: string;
   storeList: string;
-
-  // label: string;
-  // loadOptions: () => Promise<IDropdownOption[]>;
-  // onChanged: (option: IDropdownOption, index?: number) => void;
-  // selectedKey: string | number;
-  // disabled: boolean;
-  // stateKey: string;
 }
 
 export interface ILink {
