@@ -6,4 +6,14 @@
         ClientSideComponentId="3efdbfa4-a534-476d-bf48-9dce9a5ede13"
         ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
     </CustomAction>
+      <Field ID="{3c067ee7-2172-43ec-bef5-092bd2230c08}"
+          Name="SPFxPercentage"
+          DisplayName="Percentuale"
+          Type="Number"
+          Min="0"
+          Required="FALSE"
+          Group="SPFx Columns"
+          ClientSideComponentId="7e7a4262-d02b-49bf-bfcb-e6ef1716aaef">
+  </Field>
 </Elements>
+

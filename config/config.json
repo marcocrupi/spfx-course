@@ -25,12 +25,21 @@
           "manifest": "./src/extensions/helloWorld/HelloWorldApplicationCustomizer.manifest.json"
         }
       ]
+    },
+    "first-field-customizer-field-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/firstFieldCustomizer/FirstFieldCustomizerFieldCustomizer.js",
+          "manifest": "./src/extensions/firstFieldCustomizer/FirstFieldCustomizerFieldCustomizer.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "SpfxCourseWebPartStrings": "lib/webparts/spfxCourse/loc/{locale}.js",
     "RenderAllPagesWebPartStrings": "lib/webparts/renderAllPages/loc/{locale}.js",
-    "HelloWorldApplicationCustomizerStrings": "lib/extensions/helloWorld/loc/{locale}.js"
+    "HelloWorldApplicationCustomizerStrings": "lib/extensions/helloWorld/loc/{locale}.js",
+    "FirstFieldCustomizerFieldCustomizerStrings": "lib/extensions/firstFieldCustomizer/loc/{locale}.js"
   }
 }

@@ -4,7 +4,7 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://clustermwp.sharepoint.com/sites/TestMarco",
+      "pageUrl": "https://clustermwp.sharepoint.com/sites/TestMarco/Lists/Ordini/AllItems.aspx",
       "customActions": {
         "3efdbfa4-a534-476d-bf48-9dce9a5ede13": {
           "location": "ClientSideExtension.ApplicationCustomizer",
@@ -12,6 +12,14 @@
             "testMessage": "Test message",
             "Top": "Top area of the page",
             "Bottom": "Bottom area of the page"
+          }
+        }
+      },
+      "fieldCustomizers": {
+        "Percentuale": {
+          "id": "3c067ee7-2172-43ec-bef5-092bd2230c08",
+          "properties": {
+            "sampleText": "Value"
           }
         }
       }
@@ -25,6 +33,17 @@
             "testMessage": "Test message",
             "Top": "Top area of the page",
             "Bottom": "Bottom area of the page"
+          }
+        }
+      }
+    },
+    "firstFieldCustomizer": {
+      "pageUrl": "https://clustermwp.sharepoint.com/sites/TestMarco/Lists/Ordini/AllItems.aspx",
+      "fieldCustomizers": {
+        "Percentuale": {
+          "id": "3c067ee7-2172-43ec-bef5-092bd2230c08",
+          "properties": {
+            "sampleText": "Value"
           }
         }
       }
