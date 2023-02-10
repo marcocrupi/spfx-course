@@ -33,6 +33,14 @@
           "manifest": "./src/extensions/firstFieldCustomizer/FirstFieldCustomizerFieldCustomizer.manifest.json"
         }
       ]
+    },
+    "first-listview-command-set": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/firstListview/FirstListviewCommandSet.js",
+          "manifest": "./src/extensions/firstListview/FirstListviewCommandSet.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -40,6 +48,7 @@
     "SpfxCourseWebPartStrings": "lib/webparts/spfxCourse/loc/{locale}.js",
     "RenderAllPagesWebPartStrings": "lib/webparts/renderAllPages/loc/{locale}.js",
     "HelloWorldApplicationCustomizerStrings": "lib/extensions/helloWorld/loc/{locale}.js",
-    "FirstFieldCustomizerFieldCustomizerStrings": "lib/extensions/firstFieldCustomizer/loc/{locale}.js"
+    "FirstFieldCustomizerFieldCustomizerStrings": "lib/extensions/firstFieldCustomizer/loc/{locale}.js",
+    "FirstListviewCommandSetStrings": "lib/extensions/firstListview/loc/{locale}.js"
   }
 }
