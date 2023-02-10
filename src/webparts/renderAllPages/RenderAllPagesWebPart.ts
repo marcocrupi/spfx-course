@@ -15,6 +15,7 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 export interface IRenderAllPagesWebPartProps {
   description: string;
   allPages: ISPLists;
+  filter: string;
 }
 
 export interface ISPLists {
@@ -49,6 +50,7 @@ export default class RenderAllPagesWebPart extends BaseClientSideWebPart<IRender
       React.createElement(RenderAllPages, {
         description: this.properties.description,
         allPages: pagesList,
+        filter: this.properties.filter,
       });
 
     ReactDom.render(element, this.domElement);
@@ -76,6 +78,9 @@ export default class RenderAllPagesWebPart extends BaseClientSideWebPart<IRender
               groupFields: [
                 PropertyPaneTextField("description", {
                   label: strings.DescriptionFieldLabel,
+                }),
+                PropertyPaneTextField("filter", {
+                  label: "Filter",
                 }),
               ],
             },

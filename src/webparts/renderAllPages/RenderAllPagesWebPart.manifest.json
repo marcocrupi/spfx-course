@@ -21,7 +21,8 @@
     "description": { "default": "render-all-pages description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "render-all-pages"
+      "description": "render-all-pages",
+      "filter": ""
     }
   }]
 }

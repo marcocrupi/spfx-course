@@ -15,8 +15,20 @@ export default class RenderAllPages extends React.Component<
   IRenderAllPagesProps,
   {}
 > {
+  private filterPages(pages: any, keyword: string): any {
+    return pages.filter((page) =>
+      page.Title.toLowerCase().includes(keyword.toLowerCase())
+    );
+  }
+
   public render(): React.ReactElement<IRenderAllPagesProps> {
-    const { allPages } = this.props;
+    const { allPages, filter } = this.props;
+
+    const filteredPages = this.filterPages(
+      allPages.value,
+      filter ? filter : ""
+    );
+
     return (
       <div className={styles.renderAllPages}>
         <div className={styles.container}>
@@ -26,13 +38,11 @@ export default class RenderAllPages extends React.Component<
 
               <div>
                 <div className={styles.allPages}>
-                  {allPages.value.map((item: ISPList, index: number) => (
+                  {filteredPages.map((item: ISPList, index: number) => (
                     <div key={index} className={styles.boxPage}>
                       <img src={item.BannerImageUrl.Url} alt={item.Title} />
                       <h2>{item.Title}</h2>
-                      <p>
-                        <strong>Data di creazione:</strong> {item.Created}
-                      </p>
+                      <p>Data di creazione: {item.Created}</p>
                     </div>
                   ))}
                 </div>

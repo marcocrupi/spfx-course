@@ -1,6 +1,7 @@
 export interface IRenderAllPagesProps {
   description: string;
   allPages: ISPLists;
+  filter: string;
 }
 
 export interface ISPLists {
