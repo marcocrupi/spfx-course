@@ -4,9 +4,7 @@ import { IGrapApiTestProps } from "./IGrapApiTestProps";
 import { escape } from "@microsoft/sp-lodash-subset";
 
 import { MSGraphClient } from "@microsoft/sp-http";
-import * as MicrosoftGraph from "@microsoft/microsoft-graph-types";
 import {
-  autobind,
   PrimaryButton,
   DetailsList,
   DetailsListLayoutMode,
@@ -57,7 +55,6 @@ export default class GrapApiTest extends React.Component<
     };
   }
 
-  @autobind
   private getUserDetails(): void {
     this.props.context.msGraphClientFactory
       .getClient()
@@ -110,7 +107,7 @@ export default class GrapApiTest extends React.Component<
                 <PrimaryButton
                   text="Search"
                   title="Search"
-                  onClick={this.getUserDetails}
+                  onClick={() => this.getUserDetails()}
                 />
               </p>
               {this.state.users != null && this.state.users.length > 0 ? (
