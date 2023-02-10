@@ -17,11 +17,20 @@
           "manifest": "./src/webparts/renderAllPages/RenderAllPagesWebPart.manifest.json"
         }
       ]
+    },
+    "hello-world-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/helloWorld/HelloWorldApplicationCustomizer.js",
+          "manifest": "./src/extensions/helloWorld/HelloWorldApplicationCustomizer.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "SpfxCourseWebPartStrings": "lib/webparts/spfxCourse/loc/{locale}.js",
-    "RenderAllPagesWebPartStrings": "lib/webparts/renderAllPages/loc/{locale}.js"
+    "RenderAllPagesWebPartStrings": "lib/webparts/renderAllPages/loc/{locale}.js",
+    "HelloWorldApplicationCustomizerStrings": "lib/extensions/helloWorld/loc/{locale}.js"
   }
 }

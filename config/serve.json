@@ -4,7 +4,26 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://clustermwp.sharepoint.com/sites/TestMarco"
+      "pageUrl": "https://clustermwp.sharepoint.com/sites/TestMarco",
+      "customActions": {
+        "3efdbfa4-a534-476d-bf48-9dce9a5ede13": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "helloWorld": {
+      "pageUrl": "https://clustermwp.sharepoint.com/sites/TestMarco",
+      "customActions": {
+        "3efdbfa4-a534-476d-bf48-9dce9a5ede13": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
     }
   }
 }
