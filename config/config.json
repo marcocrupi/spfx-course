@@ -41,6 +41,14 @@
           "manifest": "./src/extensions/firstListview/FirstListviewCommandSet.manifest.json"
         }
       ]
+    },
+    "grap-api-test-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/grapApiTest/GrapApiTestWebPart.js",
+          "manifest": "./src/webparts/grapApiTest/GrapApiTestWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -49,6 +57,7 @@
     "RenderAllPagesWebPartStrings": "lib/webparts/renderAllPages/loc/{locale}.js",
     "HelloWorldApplicationCustomizerStrings": "lib/extensions/helloWorld/loc/{locale}.js",
     "FirstFieldCustomizerFieldCustomizerStrings": "lib/extensions/firstFieldCustomizer/loc/{locale}.js",
-    "FirstListviewCommandSetStrings": "lib/extensions/firstListview/loc/{locale}.js"
+    "FirstListviewCommandSetStrings": "lib/extensions/firstListview/loc/{locale}.js",
+    "GrapApiTestWebPartStrings": "lib/webparts/grapApiTest/loc/{locale}.js"
   }
 }
